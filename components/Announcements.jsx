@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Announcements = () => {
+export const Announcements = () => {
 	return (
 		<div className='text-white py-1 text-center bg-black'>
 			Super Deal! 5 Free Arrows with Orders Over 35g!!!
@@ -8,4 +8,3 @@ const Announcements = () => {
 	);
 };
 
-export default Announcements;
