@@ -16,18 +16,18 @@ export const Product = () => {
 		<div>
 			<Announcements />
 			<Navbar />
-			<div className='h-[85vh] flex justify-center items-center p-9'>
-				<div className='border flex-1 w-6/12 h-3/6 flex flex-col justify-center items-center shadow-xl rounded'>
+			<div className='h-[85vh] flex flex-col md:flex-row justify-center items-center p-9'>
+				<div className='border p-20 flex-1 flex flex-col justify-center items-center shadow-xl rounded'>
 					<h1 className='font-bold text-3xl mb-8'>Sword</h1>
 					<i className='ra ra-sword text-9xl'></i>
 				</div>
-				<div className='flex-1 p-2 mx-10'>
+				<div className='p-2 mx-10 text-center md:text-start'>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias
 						autem perspiciatis obcaecati doloremque. Rerum, consequuntur.
 					</p>
-					<p className='my-2 font-bold text-2xl'>Price: 80g</p>
-					<div className='flex items-center'>
+					<p className='my-2 font-bold text-2xl my-5'>Price: 80g</p>
+					<div className='flex items-center justify-center'>
 						<button className='text-3xl p-4' onClick={() => changeProductQuantity('subtract')}>-</button>
 						<span className='mx-1 border-2 rounded p-2 text-xl'>{quantity}</span>
 						<button className='text-3xl p-4' onClick={() => changeProductQuantity('add')}>+</button>

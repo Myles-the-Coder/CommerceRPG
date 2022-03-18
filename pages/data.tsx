@@ -46,10 +46,10 @@ export const categories = [
 ];
 
 export const weapons = [
-	{id: 1,icon: 'ra ra-sword',},
-	{ id: 2, icon: 'ra ra-battered-axe' },
-	{ id: 3, icon: 'ra ra-axe' },
-	{ id: 4, icon: 'ra ra-boomerang' },
-	{ id: 5, icon: 'ra ra-croc-sword' },
-	{ id: 6, icon: 'ra ra-flat-hammer' },
+	{ id: 1, name: 'sword.png'},
+	{ id: 2, name: 'axe.png'},
+	{ id: 3, name: 'bow.png'},
+	{ id: 4, name: 'spear.png'},
+	{ id: 5, name: 'sword.png'},
+	{ id: 6, name: 'sword.png'},
 ];
