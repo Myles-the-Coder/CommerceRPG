@@ -1,10 +1,16 @@
-import React from 'react'
-import {categories} from '../pages/data'
-import { CategoryItem } from './CategoryItem'
+import React from 'react';
+import { categories } from 'pages/data';
+import { CategoryItem } from './CategoryItem';
 
 export const Categories = () => {
-  return (
-    <div className='p-4 grid grid-cols-1 w-full md:grid-cols-2 lg:grid-cols-3'>
-      {categories.map((item) => <CategoryItem item={item} key={item.id}/>)}</div>
-  )
-}
+	return (
+    <>
+    <h1 className='text-5xl text-center font-bold mt-5'>Categories</h1>
+		<div className='p-4 w-11/12 m-auto flex flex-wrap justify-center items-center'>
+			{categories.map(item => (
+				<CategoryItem item={item} key={item.id} />
+			))}
+		</div>
+    </>
+	);
+};

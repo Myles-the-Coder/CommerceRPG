@@ -13,7 +13,7 @@ export const Newsletter = () => {
 					placeholder='Your Email Address'
 					className='outline-none p-2 w-full'
 				/>
-				<Image src={require('../icons/right-arrow.svg')} 
+				<Image src={require('../icons/arrowIcon.png')} 
         width={35}
         height={30}
         className='hover:scale-110 cursor-pointer'

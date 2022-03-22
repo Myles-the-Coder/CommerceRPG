@@ -1,9 +1,9 @@
 import React from 'react';
-import { Navbar } from '../components/Navbar';
-import { Announcements } from '../components/Announcements';
-import { Newsletter } from '../components/Newsletter';
-import { Products } from '../components/Products';
-import { Footer } from '../components/Footer';
+import { Navbar } from 'components/Navbar';
+import { Announcements } from 'components/Announcements';
+import { Newsletter } from 'components/Newsletter';
+import { Products } from 'components/Products';
+import { Footer } from 'components/Footer';
 
 export const ProductList = () => {
 	return (
@@ -30,7 +30,7 @@ export const ProductList = () => {
 					</select>
 				</div>
 			</div>
-			<Products />
+			<Products/>
 			<Newsletter />
 			<Footer />
 		</>

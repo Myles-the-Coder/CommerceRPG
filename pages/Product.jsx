@@ -13,7 +13,7 @@ export const Product = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<Announcements />
 			<Navbar />
 			<div className='h-[85vh] flex flex-col md:flex-row justify-center items-center p-9'>
@@ -26,7 +26,7 @@ export const Product = () => {
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias
 						autem perspiciatis obcaecati doloremque. Rerum, consequuntur.
 					</p>
-					<p className='my-2 font-bold text-2xl my-5'>Price: 80g</p>
+					<p className='my-2 font-bold text-2xl'>Price: 80g</p>
 					<div className='flex items-center justify-center'>
 						<button className='text-3xl p-4' onClick={() => changeProductQuantity('subtract')}>-</button>
 						<span className='mx-1 border-2 rounded p-2 text-xl'>{quantity}</span>
@@ -37,6 +37,6 @@ export const Product = () => {
 			</div>
 			<Newsletter />
 			<Footer />
-		</div>
+		</>
 	);
 };
