@@ -7,7 +7,7 @@ export const CategoryItem = ({item}) => {
     <div key={id} className='m-2 bg-fuchsia-400 flex-grow flex justify-center items-center flex-col text-center shadow-xl h-80'>
       <i className={`${icon} text-9xl`}></i>
       <h1 className='text-2xl font-bold text-white'>{title}</h1>
-      <Link href={`/products/${title === 'All Products' ? 'all-products' : title}`}>
+      <Link href={title === 'All Products' ? `/ProductList` : `/ProductList?category=${title.toLowerCase()}`}>
       <a className='my-3 font-bold text-center transition-all ease duration-200 hover:scale-110'>SHOP NOW</a>
       </Link>
       </div>

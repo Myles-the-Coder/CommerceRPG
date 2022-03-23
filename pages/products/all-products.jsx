@@ -1,23 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Head from 'next/head';
 import { Navbar } from '../../components/Navbar';
 import { Announcements } from '../../components/Announcements';
 import { Newsletter } from '../../components/Newsletter';
 import { Products } from '../../components/Products';
 import { Footer } from '../../components/Footer';
-import {ProductsHeading} from '../../components/ProductsHeading'
+import { ProductsHeading } from '../../components/ProductsHeading';
 import { fullInventory } from '../data';
 
 const allProducts = () => {
-  return (
-    <>
-    <Announcements />
-    <Navbar />
-    <ProductsHeading title='All Products'/>
-    <Products products={fullInventory}/>
-    <Newsletter />
-    <Footer />
-  </>
-  )
-}
+	const [filter, setFilter] = useState({});
+	const handleFilter = ({ target }) => {
+		const value = target.value;
+		setFilter({ [target.name]: value });
+	};
 
-export default allProducts
+	return (
+		<>
+			<Head>
+				<title>All Products</title>
+			</Head>
+			<Announcements />
+			<Navbar />
+			<ProductsHeading title='All Products' handleFilter={handleFilter} />
+			<Products products={fullInventory} />
+			<Newsletter />
+			<Footer />
+		</>
+	);
+};
+
+export default allProducts;
