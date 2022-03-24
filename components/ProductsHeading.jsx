@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ProductsHeading = ({category, handleFilter}) => {
+export const ProductsHeading = ({category, handleFilter, handleSort}) => {
   const capitalize = (s) => {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -8,7 +8,7 @@ export const ProductsHeading = ({category, handleFilter}) => {
 
 	return (
 		<>
-    <h1 className=' text-center font-bold text-5xl m-3'>{capitalize(category)}</h1>
+    <h1 className=' text-center font-bold text-5xl m-3'>{capitalize(category || 'Shop Products')}</h1>
     <div className='flex items-center justify-between md:justify-center'>
 				{!category && <div className='mx-4'>
 					<span className='text-xl font-medium'>Filter Products</span>
@@ -22,12 +22,12 @@ export const ProductsHeading = ({category, handleFilter}) => {
 				</div>}
 				<div className='mx-4'>
 					<span className='text-xl font-medium'>Sort Products</span>
-					<select name='Sorted' id='' className='p-2 border-2 m-2 cursor-pointer' onChange={({target}) => setSort(target.value)}>
-						<option value='Newest'>Newest</option>
-						<option value='Alphabetically_A-Z'>Alphabetically: A-Z</option>
-						<option value='Alphabetically_Z-A'>Alphabetically: Z-A</option>
-						<option value='Price_asc'>Price (asc.)</option>
-						<option value='Price_desc'>Price (desc.)</option>
+					<select name='Sorted' id='' className='p-2 border-2 m-2 cursor-pointer' onChange={handleSort}>
+						<option value='newest'>Newest</option>
+						<option value='a-z'>Alphabetically: A-Z</option>
+						<option value='z-a'>Alphabetically: Z-A</option>
+						<option value='asc'>Price (asc.)</option>
+						<option value='desc'>Price (desc.)</option>
 					</select>
 				</div>
     </div>

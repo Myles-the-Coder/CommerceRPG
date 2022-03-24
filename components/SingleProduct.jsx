@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { singleProductIcons } from '../pages/data';
 
 export const SingleProduct = ({ product }) => {
 	const [isFavorited, setIsFavorited] = useState(false);
+  const router = useRouter()
 
 	return (
 		<div
@@ -33,7 +35,7 @@ export const SingleProduct = ({ product }) => {
 							height={44}
 							alt={`${name} icon`}
 							onClick={() =>
-								name === 'emptyHeart' ? setIsFavorited(prev => !prev) : ''
+								name === 'emptyHeart' ? setIsFavorited(prev => !prev) : router.push(`/Product/${product._id}`)
 							}
 						/>
 					</div>

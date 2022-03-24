@@ -12,16 +12,22 @@ const ProductList = () => {
 	const [filter, setFilter] = useState({});
 	const [sort, setSort] = useState('newest');
 	const { category } = router.query;
+
 	const handleFilter = ({ target }) => {
 		const { name, value } = target;
 		setFilter({ [name]: value });
 	};
+
+  const handleSort = ({ target }) => {
+    const { value } = target;
+    setSort(value);
+  }
 	return (
 		<>
 			<Announcements />
 			<Navbar />
-			<ProductsHeading handleFilter={handleFilter} category={category} />
-			<Products category={category} filter={filter} />
+			<ProductsHeading handleFilter={handleFilter} handleSort={handleSort} category={category} />
+			<Products category={category} filter={filter} sort={sort}/>
 			<Newsletter />
 			<Footer />
 		</>
