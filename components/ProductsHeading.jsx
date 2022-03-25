@@ -14,7 +14,7 @@ export const ProductsHeading = ({category, handleFilter, handleSort}) => {
 					<span className='text-xl font-medium'>Filter Products</span>
 					<select name='Filter' id='' defaultValue={'all'} className='p-2 border-2 m-2 cursor-pointer' onChange={handleFilter}>
 						<option value='all'>All Products</option>
-						<option value='weapon'>Weapons</option>
+						<option value='weapons'>Weapons</option>
 						<option value='armor'>Armor</option>
 						<option value='magic'>Magic</option>
 						<option value='inventory'>Inventory</option>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Navbar } from 'components/Navbar';
 import { Announcements } from 'components/Announcements';
@@ -24,6 +25,11 @@ const ProductList = () => {
   }
 	return (
 		<>
+      <Head>
+    <title>
+      {category ? `${category}` : 'Shop Products'}
+    </title>
+      </Head>
 			<Announcements />
 			<Navbar />
 			<ProductsHeading handleFilter={handleFilter} handleSort={handleSort} category={category} />

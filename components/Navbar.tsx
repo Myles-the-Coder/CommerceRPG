@@ -1,9 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
-  const user = true
+	const user = true;
+	const cart = useSelector(({cart}) => cart);
+
 	return (
 		<nav className='h-16 border-b-2'>
 			<div className='py-3 flex justify-evenly text-center items-center'>
@@ -19,7 +22,7 @@ export const Navbar = () => {
 					<Image
 						src={require('icons/magnifyingGlass.png')}
 						width={30}
-						height={20}
+						height={30}
 						className='bg-slate-300 cursor-pointer'
 						alt='Search Icon'
 					/>
@@ -31,20 +34,25 @@ export const Navbar = () => {
 				</div>
 				<div className='text-black-500 flex-2 md:flex-1'>
 					<ul className='flex items-center justify-end text-center'>
-					{!user && <li className='mx-1 md:mx-2 cursor-pointer'>
-							<Link href='/Register'>
-								<a>REGISTER</a>
-							</Link>
-						</li>}
+						{!user && (
+							<li className='mx-1 md:mx-2 cursor-pointer'>
+								<Link href='/Register'>
+									<a>REGISTER</a>
+								</Link>
+							</li>
+						)}
 						<li className='mx-1 md:mx-2 cursor-pointer'>LOGOUT</li>
-						<li className='mx-4'>
+						<li className='mx-4 relative'>
 							{' '}
 							<Link href='/Cart'>
 								<a>
+									<div className={`absolute right-0 top-0 w-4 h-4 bg-teal-600 z-50 rounded-full text-white justify-center items-center text-[10px] ${cart.quantity === 0 ? `hidden` : 'flex'}`}>
+										{cart.quantity}
+									</div>
 									<Image
 										src={require('icons/shoppingCart.png')}
-										width={30}
-										height={30}
+										width={35}
+										height={35}
 										alt='Search Icon'
 										className='cursor-pointer'
 									/>

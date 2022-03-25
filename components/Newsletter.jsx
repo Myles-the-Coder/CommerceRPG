@@ -4,8 +4,7 @@ import Image from 'next/image';
 export const Newsletter = () => {
 	return (
 		<div className=' flex justify-center items-center flex-col w-full h-[40vh] bg-fuchsia-400'>
-			<i className='ra ra-scroll-unfurled mr-3 text-5xl'></i>
-			<h1 className='text-6xl'>Newsletter</h1>
+			<h1 className='text-6xl'>Newsletter <i className='ra ra-scroll-unfurled mr-3 text-5xl' /></h1>
 			<p className='my-5 text-xl '>Subscribe for new inventory drops!</p>
 			<div className='w-6/12 bg-white flex border-2'>
 				<input

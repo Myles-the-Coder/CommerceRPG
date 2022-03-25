@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { SingleProduct } from 'components/SingleProduct';
+import { publicRequest } from '../requestMethods';
 
 export const Products = ({ category, filter, sort }) => {
 	const [products, setProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
-	console.log(sort);
+
 	useEffect(() => {
 		const getProducts = async () => {
-			const { data } = await axios.get(
-				`https://commerce-rpg.herokuapp.com/products${
-					category ? `?category=${category}` : ''
-				}`
+			const { data } = await publicRequest.get(
+				`/products${category ? `?category=${category}` : ''}`
 			);
 			setProducts(data);
 		};
@@ -45,7 +43,7 @@ export const Products = ({ category, filter, sort }) => {
 				break;
 			case `z-a`:
 				setFilteredProducts(prev =>
-					[...prev].sort((a, b) =>  b.title.localeCompare(a.title))
+					[...prev].sort((a, b) => b.title.localeCompare(a.title))
 				);
 				break;
 			case `asc`:

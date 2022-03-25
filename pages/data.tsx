@@ -69,31 +69,15 @@ export const singleProductIcons = [
   {name: 'emptyHeart'}
 ]
 
-export const weapons = [
-	{ id: 1, name: 'sword.png' },
-	{ id: 2, name: 'axe.png' },
-	{ id: 3, name: 'bow.png' },
-	{ id: 4, name: 'spear.png' },
+export const footerLinks = [
+  { title: 'Home', href: '/' },
+  { title: 'Cart', href: '/Cart' },
+  { title: 'Weapons', href: '/ProductList?category=weapons' },
+  { title: 'Armor', href: '/ProductList?category=armor' },
+  { title: 'Magic', href: '/ProductList?category=magic' },
+  { title: 'Inventory', href: '/ProductList?category=inventory' },
+  { title: 'All Products', href: '/ProductList' },
+  { title: 'My Account', href: '#' },
+  { title: 'Order Tracking', href: '#' },
+  { title: 'Terms', href: '#' },
 ];
-
-export const armor = [
-	{ id: 6, name: 'helmet.png' },
-	{ id: 7, name: 'cuirass.png' },
-	{ id: 8, name: 'shield.png' },
-];
-
-export const magic = [
-	{ id: 9, name: 'ring.png' },
-	{ id: 10, name: 'wand.png' },
-	{ id: 11, name: 'poisonPotion.png' },
-];
-
-export const inventory = [
-	{ id: 12, name: 'key.png' },
-	{ id: 13, name: 'bag.png' },
-	{ id: 14, name: 'lifePotion.png' },
-];
-
-export const fullInventory = [
-  ...weapons, ...armor, ...magic, ...inventory
-]
