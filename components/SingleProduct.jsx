@@ -2,10 +2,29 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { singleProductIcons } from '../pages/data';
+// import { useDispatch } from 'react-redux';
+// import { addProduct } from '../redux/cartRedux';
+
 
 export const SingleProduct = ({ product }) => {
 	const [isFavorited, setIsFavorited] = useState(false);
   const router = useRouter()
+  // const dispatch = useDispatch();
+
+  // const addProductToCart = () => {
+  //   dispatch(addProduct({ product }));
+  // }
+  
+  // Toggles between functions depending on icon
+  const handleClick = (name) => {
+    if (name === 'emptyHeart') {
+      setIsFavorited(prev => !prev)
+    } else if (name === 'shoppingCart') {
+      addProductToCart()
+    } else {
+      router.push(`/Product/${product._id}`)
+    }
+  }
 
 	return (
 		<div
@@ -34,9 +53,7 @@ export const SingleProduct = ({ product }) => {
 							width={44}
 							height={44}
 							alt={`${name} icon`}
-							onClick={() =>
-								name === 'emptyHeart' ? setIsFavorited(prev => !prev) : router.push(`/Product/${product._id}`)
-							}
+							onClick={() => handleClick(name)}
 						/>
 					</div>
 				))}

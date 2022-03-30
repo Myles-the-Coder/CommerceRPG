@@ -1,20 +1,27 @@
-import React, {useState} from 'react'
+import React  from 'react'
+import Image from 'next/image'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const CartItem = () => {
-  const [quantity, setQuantity] = useState(0);
+export const CartItem = ({product}) => {
+ const {quantity} = useSelector(state => state.cart.products)
+//  const [newQuantity, setNewQuantity] = useState(quantity)
+ const dispatch = useDispatch()
 
 	const changeProductQuantity = action => {
-		setQuantity(
-			action === 'add' ? quantity + 1 : quantity > 0 ? quantity - 1 : 0
-		);
+		// if (action === 'add') {
+    //   setNewQuantity(newQuantity + 1)
+    // }
+    console.log('hello')
 	};
+
+
   return (
-    <div className='flex flex-col md:flex-row justify-between items-center min-h-[40vh]'>
+    <div className='flex flex-col md:flex-row justify-between items-center min-h-[40vh]' key={product._id}>
     <div className='flex-1 px-2 py-4 m-3 shadow flex justify-center items-center flex-col bg-gray-400'>
-        <i className='ra ra-sword text-7xl'></i>
-        <h3>
-          <b>Product:</b> Sword
+        <h3 className='mb-2'>
+          <b>Product:</b> {product.title}
         </h3>
+        <Image src={product.img} width={100} height={100} alt={product.title}/>
       </div>
       <b className='block md:hidden'>Quantity:</b>
       <div className='flex-1 flex items-center justify-center'>
@@ -23,7 +30,7 @@ export const CartItem = () => {
           onClick={() => changeProductQuantity('subtract')}>
           -
         </button>
-        <span className='mx-1 border-2 rounded p-2 text-xl'>{quantity}</span>
+        <span className='mx-1 border-2 rounded p-2 text-xl'>{product.quantity}</span>
         <button
           className='text-xl md:text-3xl p-4'
           onClick={() => changeProductQuantity('add')}>
@@ -34,7 +41,7 @@ export const CartItem = () => {
       <div className='flex-1 text-center p-3 m-2'>
       <h3>
           <b className='block md:hidden'>Price: </b>
-          <b>{80 * quantity}g</b> 
+          <b>{product.price * product.quantity}</b> 
         </h3>
       </div>
       <hr className='bg-white h-1 outline-none' />

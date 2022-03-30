@@ -5,6 +5,9 @@ const nextConfig = {
 	images: {
 		domains: ['i.postimg.cc', 'www.bing.com', 'th.bing.com'],
 	},
+  env: {
+    STRIPE_KEY: process.env.STRIPE_KEY
+  }
 };
 
 module.exports = nextConfig;

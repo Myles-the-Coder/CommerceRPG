@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
 	const user = true;
-	const cart = useSelector(({cart}) => cart);
+	const quantity = useSelector((state) => state.cart.quantity);
 
 	return (
 		<nav className='h-16 border-b-2'>
@@ -46,8 +46,8 @@ export const Navbar = () => {
 							{' '}
 							<Link href='/Cart'>
 								<a>
-									<div className={`absolute right-0 top-0 w-4 h-4 bg-teal-600 z-50 rounded-full text-white justify-center items-center text-[10px] ${cart.quantity === 0 ? `hidden` : 'flex'}`}>
-										{cart.quantity}
+									<div className={`absolute right-0 top-0 w-4 h-4 bg-teal-600 z-50 rounded-full text-white justify-center items-center text-[10px] ${quantity === 0 ? `hidden` : 'flex'}`}>
+										{quantity}
 									</div>
 									<Image
 										src={require('icons/shoppingCart.png')}

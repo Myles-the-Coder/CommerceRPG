@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Navbar } from 'components/Navbar';
 import { Announcements } from 'components/Announcements';
 import { Newsletter } from 'components/Newsletter';
 import { Footer } from 'components/Footer';
-import { publicRequest } from '../../requestMethods';
+import { userRequest } from '/requestMethods';
+import {addProduct} from '/redux/cartSlice'
+import { useDispatch } from 'react-redux';
+import { Spinner } from 'components/Spinner';
 
 const Product = () => {
 	const router = useRouter();
 	const { id } = router.query;
 	const [quantity, setQuantity] = useState(1);
 	const [product, setProduct] = useState(null);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const getProduct = async () => {
 			try {
-				const { data } = await publicRequest.get(`/products/find/${id}`);
+				const { data } = await userRequest.get(`/products/find/${id}`);
 				setProduct(data);
 			} catch (error) {
 				console.log(error);
@@ -32,11 +35,17 @@ const Product = () => {
 		);
 	};
 
+	const addProductToCart = () => {
+		dispatch(
+			addProduct({ ...product, quantity })
+		);
+	};
+
 	return (
 		<>
 			<Announcements />
 			<Navbar />
-			{product && (
+			{!product ? <Spinner/> : (
 				<div className='h-[85vh] flex flex-col md:flex-row justify-center items-center p-9'>
 					<div className='border p-20 flex-1 flex flex-col justify-center items-center shadow-xl rounded'>
 						<h1 className='font-bold text-3xl mb-8'>{product.title}</h1>
@@ -64,7 +73,9 @@ const Product = () => {
 								onClick={() => changeProductQuantity('add')}>
 								+
 							</button>
-							<button className='ml-10 border-2 p-4 rounded font-medium transition-all ease hover:bg-gray-200'>
+							<button
+								className='ml-10 border-2 p-4 rounded font-medium transition-all ease hover:bg-gray-200'
+								onClick={addProductToCart}>
 								Add to Cart
 							</button>
 						</div>
