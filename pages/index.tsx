@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 const App = () => {
   const router = useRouter();
-  const user = true
+  const user = false
 
   useEffect(() => {
     if (!user) {
