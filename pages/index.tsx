@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
+import Login from './Login'
 import { Navbar } from 'components/Navbar';
 import {Announcements} from 'components/Announcements';
 import { Slider } from 'components/Slider';
@@ -7,28 +8,33 @@ import { Categories } from 'components/Categories';
 import {Newsletter} from 'components/Newsletter'
 import {Footer} from 'components/Footer'
 import { useRouter } from 'next/router';
+import { RootStateOrAny, useSelector } from 'react-redux';
 
 const App = () => {
+  const {currentUser} = useSelector((state: RootStateOrAny) => state.user)
   const router = useRouter();
-  const user = false
 
-  useEffect(() => {
-    if (!user) {
-    router.push('/Login')
-    }
-  }, [user])
+  // useEffect(() => {
+  //   // const user = localStorage.getItem('user')
+  //   if (!currentUser) {
+  //     router.push('/Login')
+  //   }
+  // }, [currentUser, router])
 
 	return (
 		<>
     <Head>
       <title>CommerceRPG</title>
     </Head>
-			<Announcements />
+    {currentUser ? 
+    <>
+    <Announcements />
 			<Navbar />
 			<Slider />
 			<Categories />
       <Newsletter />
-      <Footer />
+      <Footer /> 
+      </>: <Login />}
 		</>
 	);
 };

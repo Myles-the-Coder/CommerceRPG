@@ -1,5 +1,5 @@
 import { publicRequest } from '../requestMethods';
-import {loginStart, loginFailure, loginSuccess} from './userSlice/loginStart';
+import {loginStart, loginSuccess, loginFailure} from '../redux/userSlice'
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart())

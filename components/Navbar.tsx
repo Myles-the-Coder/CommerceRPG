@@ -2,11 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
 
 export const Navbar = () => {
 	const user = true;
-	const quantity = useSelector((state) => state.cart.quantity);
-
+	const {quantity} = useSelector((state: RootState) => state.cart);
 	return (
 		<nav className='h-16 border-b-2'>
 			<div className='py-3 flex justify-evenly text-center items-center'>
@@ -46,7 +46,10 @@ export const Navbar = () => {
 							{' '}
 							<Link href='/Cart'>
 								<a>
-									<div className={`absolute right-0 top-0 w-4 h-4 bg-teal-600 z-50 rounded-full text-white justify-center items-center text-[10px] ${quantity === 0 ? `hidden` : 'flex'}`}>
+									<div
+										className={`absolute right-0 top-0 w-4 h-4 bg-teal-600 z-50 rounded-full text-white justify-center items-center text-[10px] ${
+											quantity === 0 ? `hidden` : 'flex'
+										}`}>
 										{quantity}
 									</div>
 									<Image
