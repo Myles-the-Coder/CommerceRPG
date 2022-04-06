@@ -8,7 +8,7 @@ export const Navbar = () => {
 	const user = true;
 	const {quantity} = useSelector((state: RootState) => state.cart);
 	return (
-		<nav className='h-16 border-b-2'>
+		<nav className='h-16 border-b-2 bg-gray-200'>
 			<div className='py-3 flex justify-evenly text-center items-center'>
 				<div className='text-base cursor-pointer m-2 hidden md:block'>EN</div>
 				<div className='mx-3 text-black-500 flex-1 flex w-20 md:w-40'>
@@ -47,7 +47,7 @@ export const Navbar = () => {
 							<Link href='/Cart'>
 								<a>
 									<div
-										className={`absolute right-0 top-0 w-4 h-4 bg-teal-600 z-50 rounded-full text-white justify-center items-center text-[10px] ${
+										className={`absolute right-0 top-0 w-4 h-4 bg-gray-600 z-50 rounded-full text-white justify-center items-center text-[10px] ${
 											quantity === 0 ? `hidden` : 'flex'
 										}`}>
 										{quantity}

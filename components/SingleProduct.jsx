@@ -2,38 +2,43 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { singleProductIcons } from '../pages/data';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addToWishlist, removeFromWishlist } from '/redux/userSlice';
 // import { addProduct } from '../redux/cartRedux';
-
 
 export const SingleProduct = ({ product }) => {
 	const [isFavorited, setIsFavorited] = useState(false);
-  const router = useRouter()
-  // const dispatch = useDispatch();
+	const router = useRouter();
+	const { _id, img } = product;
+	const dispatch = useDispatch();
+	// const addProductToCart = () => {
+	//   dispatch(addProduct({ product }));
+	// }
 
-  // const addProductToCart = () => {
-  //   dispatch(addProduct({ product }));
-  // }
-  
-  // Toggles between functions depending on icon
-  const handleClick = (name) => {
-    if (name === 'emptyHeart') {
-      setIsFavorited(prev => !prev)
-    } else if (name === 'shoppingCart') {
-      addProductToCart()
-    } else {
-      router.push(`/Product/${product._id}`)
-    }
-  }
+	// Toggles between functions depending on icon
+	const handleClick = name => {
+		if (name === 'emptyHeart') {
+			setIsFavorited(prev => !prev);
+			dispatch(
+				isFavorited 
+        ? addToWishlist(product) 
+        : removeFromWishlist(product)
+			);
+		} else if (name === 'shoppingCart') {
+			addProductToCart();
+		} else {
+			router.push(`/Product/${_id}`);
+		}
+	};
 
 	return (
 		<div
 			className='group flex flex-col m-1 justify-between relative items-center bg-gray-400 p-4 rounded'
-			key={product._id}>
+			key={_id}>
 			<div className='bg-white p-3 rounded'>
 				<Image
 					priority
-					src={product.img}
+					src={img}
 					alt='Product Image'
 					width={125}
 					height={125}

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { SingleProduct } from 'components/SingleProduct';
 import { publicRequest } from '../requestMethods';
-import {Spinner} from '../components/Spinner'
+import { Spinner } from '../components/Spinner';
 
 export const Products = ({ category, filter, sort }) => {
 	const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 	const [filteredProducts, setFilteredProducts] = useState([]);
 
 	useEffect(() => {
@@ -14,7 +14,7 @@ export const Products = ({ category, filter, sort }) => {
 				`/products${category ? `?category=${category}` : ''}`
 			);
 			setProducts(data);
-      setLoading(false)
+			setLoading(false);
 		};
 		getProducts();
 	}, [category]);
@@ -22,7 +22,7 @@ export const Products = ({ category, filter, sort }) => {
 	useEffect(() => {
 		filter &&
 			setFilteredProducts(
-				Object.values(filter)[0] === 'all'
+				category === 'all'
 					? products
 					: products.filter(({ categories }) =>
 							Object.entries(filter).every(([_, value]) =>
@@ -64,9 +64,9 @@ export const Products = ({ category, filter, sort }) => {
 		}
 	}, [sort]);
 
-  if (loading) {
-    return <Spinner />
-  }
+	if (loading) {
+		return <Spinner />;
+	}
 
 	return (
 		<div className='flex p-2 flex-wrap justify-center items-center'>
