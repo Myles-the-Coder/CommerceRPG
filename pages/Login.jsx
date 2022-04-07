@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/apiCalls';
 import { useSelector } from 'react-redux';
@@ -14,14 +15,12 @@ const Login = () => {
 		e.preventDefault();
 		login(dispatch, { username, password });
     if (currentUser) {
-      localStorage.setItem('token', currentUser.accessToken);
-      localStorage.setItem('username', currentUser.username);
       window.location.href = '/';
     }
 	};
 
 	return (
-		<div className='bg-teal-500 h-screen w-screen grid place-items-center'>
+		<div className='bg-gray-500 h-screen w-screen grid place-items-center'>
 			<form
         onSubmit={e => handleLogin(e)}
 				action=''
@@ -55,9 +54,15 @@ const Login = () => {
           disabled={isFetching}>
 					Login
 				</button>
+        <div className='inline-block p-3 text-lg'>
+        <p className='inline-block mr-2'>No Account Yet?</p>
+        <Link href='/Register'>
+          <a className='transition ease underline underline-offset-8 hover:text-gray-400'>Create Account</a>
+        </Link>
+        </div>
 				<a
 					href='#'
-					className='mt-4 transition ease underline hover:text-teal-500'>
+					className='mt-2 transition ease underline underline-offset-8 hover:text-gray-400'>
 					Forgot Password?
 				</a>
 			</form>

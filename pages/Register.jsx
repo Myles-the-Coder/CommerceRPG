@@ -1,15 +1,21 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link'
 import { useRouter } from 'next/router';
 
 const Register = () => {
   const router = useRouter()
+  const handleRegister = () => {
+    
+  }
+
 	return (
-		<div className='bg-teal-500 h-screen w-screen grid place-items-center'>
+		<div className='bg-gray-500 h-screen w-screen grid place-items-center'>
 			<Head>
 				<title>Register</title>
 			</Head>
 			<form
+        onSubmit={handleRegister}
 				action=''
 				className='flex flex-col justify-center items-center bg-gray-100 rounded w-10/12 md:w-7/12 p-10'>
 				<h1 className='font-medium text-4xl mb-4 uppercase text-center'>
@@ -21,7 +27,6 @@ const Register = () => {
 						<input
 							type='text'
 							name='First Name'
-							id=''
 							placeholder='First Name'
 							className=' border-2 outline-none p-1 my-1'
 						/>
@@ -31,7 +36,6 @@ const Register = () => {
 						<input
 							type='text'
 							name='Last Name'
-							id=''
 							placeholder='Last Name'
 							className='border-2 outline-none p-1 my-1'
 						/>
@@ -41,7 +45,6 @@ const Register = () => {
 						<input
 							type='text'
 							name='Username'
-							id=''
 							placeholder='Username'
 							className=' border-2 outline-none p-1 my-1'
 						/>
@@ -51,7 +54,6 @@ const Register = () => {
 						<input
 							type='email'
 							name='Email'
-							id=''
 							placeholder='Email'
 							className='border-2 outline-none p-1 my-1'
 						/>
@@ -62,7 +64,6 @@ const Register = () => {
 							type='password'
 							name='Password'
 							placeholder='Password'
-							id=''
 							className='border-2 outline-none p-1 my-1'
 						/>
 					</div>
@@ -71,7 +72,6 @@ const Register = () => {
 						<input
 							type='password'
 							name='Confirm Password'
-							id=''
 							placeholder='Confirm Password'
 							className='border-2 outline-none p-1 my-1'
 						/>
@@ -84,22 +84,23 @@ const Register = () => {
 					<b className='cursor-pointer'>Privacy Policy</b>
 					<input
 						type='checkbox'
-						name=''
-						id=''
+						name='Checkbox'
 						className='ml-2 w-4 h-4 cursor-pointer'
 					/>{' '}
 				</p>
         <div className='flex w-full'>
-
-        <button type='button' className='flex-1 mt-4 font-semibold border-2 p-2 transition-all ease hover:bg-gray-200' onClick={() => router.back()}>
+        <button type='button' className='flex-1 mt-4 font-semibold border-2 p-2 transition-all ease bg-gray-600 hover:bg-gray-400 text-white' onClick={() => router.back()}>
           Cancel
           </button>
 				<button
 					type='submit'
-					className=' flex-1 mt-4 font-semibold border-2 p-2 transition-all ease hover:bg-gray-200'>
+					className=' flex-1 mt-4 font-semibold border-2 p-2 transition-all ease bg-gray-600 hover:bg-gray-400 active:scale-95 text-white'>
 					Create Account
 				</button>
         </div>
+        <Link href='/Login'>
+        <a className='mt-5 underline underline-offset-8 text-slate-900 hover:text-slate-400'>Already have an account? Login in</a>
+        </Link>
 			</form>
 		</div>
 	);

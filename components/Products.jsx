@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
 import { SingleProduct } from 'components/SingleProduct';
 import { publicRequest } from '../requestMethods';
 import { Spinner } from '../components/Spinner';

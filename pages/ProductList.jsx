@@ -18,16 +18,20 @@ const ProductList = () => {
 		setFilter({ [name]: value });
 	};
 
-  const handleSort = ({ target }) => {
-    const { value } = target;
-    setSort(value);
-  }
+	const handleSort = ({ target }) => {
+		const { value } = target;
+		setSort(value);
+	};
 	return (
 		<>
 			<Announcements />
 			<Navbar />
-			<ProductsHeading handleFilter={handleFilter} handleSort={handleSort} category={category} />
-			<Products category={category} filter={filter} sort={sort}/>
+			<ProductsHeading
+				handleFilter={handleFilter}
+				handleSort={handleSort}
+				category={category}
+			/>
+			<Products category={category} filter={filter} sort={sort} />
 			<Newsletter />
 			<Footer />
 		</>

@@ -28,7 +28,7 @@ const userSlice = createSlice({
       state.wishlist.push(action.payload);
 		},
     removeFromWishlist: (state, action) => {
-      state.wishlist = state.wishlist.filter(product => product._id !== action.payload._id);
+      state.wishlist = state.wishlist.filter(({_id}) => _id !== action.payload._id);
     }
 	},
 });

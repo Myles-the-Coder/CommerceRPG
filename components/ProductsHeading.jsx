@@ -12,7 +12,7 @@ export const ProductsHeading = ({category, handleFilter, handleSort}) => {
     <div className='flex items-center justify-between md:justify-center'>
 				{!category && <div className='mx-4'>
 					<span className='text-xl font-medium'>Filter Products</span>
-					<select name='Filter' id='' defaultValue={'all'} className='p-2 border-2 m-2 cursor-pointer' onChange={handleFilter}>
+					<select name='Filter' defaultValue='all' className='p-2 border-2 m-2 cursor-pointer' onChange={handleFilter}>
 						<option value='all'>All Products</option>
 						<option value='weapons'>Weapons</option>
 						<option value='armor'>Armor</option>
@@ -22,7 +22,7 @@ export const ProductsHeading = ({category, handleFilter, handleSort}) => {
 				</div>}
 				<div className='mx-4'>
 					<span className='text-xl font-medium'>Sort Products</span>
-					<select name='Sorted' id='' className='p-2 border-2 m-2 cursor-pointer' onChange={handleSort}>
+					<select name='Sorted' className='p-2 border-2 m-2 cursor-pointer' onChange={handleSort}>
 						<option value='newest'>Newest</option>
 						<option value='a-z'>Alphabetically: A-Z</option>
 						<option value='z-a'>Alphabetically: Z-A</option>

@@ -78,6 +78,7 @@ export const footerLinks = [
   { title: 'Inventory', href: '/ProductList?category=inventory' },
   { title: 'All Products', href: '/ProductList' },
   { title: 'My Account', href: '#' },
+  { title: 'Your Wishlist', href: '/Wishlist' },
   { title: 'Order Tracking', href: '#' },
   { title: 'Terms', href: '#' },
 ];

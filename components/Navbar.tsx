@@ -3,11 +3,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/store';
+import { useDispatch } from 'react-redux';
+import { userLogout } from 'redux/userSlice';
 
 export const Navbar = () => {
-	const user = true;
+  const {currentUser} = useSelector((state: RootState) => state.user)
 	const {quantity} = useSelector((state: RootState) => state.cart);
-	return (
+	const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(userLogout())
+    window.location.reload()
+  }
+
+  return (
 		<nav className='h-16 border-b-2 bg-gray-200'>
 			<div className='py-3 flex justify-evenly text-center items-center'>
 				<div className='text-base cursor-pointer m-2 hidden md:block'>EN</div>
@@ -34,14 +42,13 @@ export const Navbar = () => {
 				</div>
 				<div className='text-black-500 flex-2 md:flex-1'>
 					<ul className='flex items-center justify-end text-center'>
-						{!user && (
+						{!currentUser ? (
 							<li className='mx-1 md:mx-2 cursor-pointer'>
 								<Link href='/Register'>
 									<a>REGISTER</a>
 								</Link>
 							</li>
-						)}
-						<li className='mx-1 md:mx-2 cursor-pointer'>LOGOUT</li>
+						) : <li className='mx-1 md:mx-2 cursor-pointer' onClick={handleLogout}>LOGOUT</li> }
 						<li className='mx-4 relative'>
 							{' '}
 							<Link href='/Cart'>

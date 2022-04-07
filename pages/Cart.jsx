@@ -7,8 +7,10 @@ import { CartItem } from 'components/CartItem';
 import { useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import { userRequest } from '../requestMethods';
+import Link from 'next/link';
 
 const Cart = () => {
+	const { wishlist } = useSelector(state => state.user);
 	const { products, quantity, total } = useSelector(state => state.cart);
 	const stripePromise = loadStripe(process.env.STRIPE_KEY);
 
@@ -18,8 +20,8 @@ const Cart = () => {
 			const { data } = await userRequest.post('/checkout/payment', {
 				item: {
 					title: 'CommerceRPG',
-					desc: 'Your cart items',
-					img: 'Test',
+					desc: 'Your Cart Items',
+					img: '',
 					quantity,
 					price: total,
 				},
@@ -42,7 +44,9 @@ const Cart = () => {
 					Continue shopping
 				</button>
 				<a href=''>Shopping Cart({quantity})</a>
-				<a href=''>Your Wishlist(0)</a>
+				<Link href='/Wishlist'>
+					<a >Your Wishlist({wishlist.length})</a>
+				</Link>
 				<button
 					className='py-2 m-2 text-sm md:text-lg  bg-black text-white px-5 uppercase'
 					onClick={handleStripeCheckout}>
@@ -50,21 +54,26 @@ const Cart = () => {
 				</button>
 			</div>
 
-			<h1 className='text-3xl text-center font-bold my-5'>Your Cart</h1>
-			<div className='hidden md:flex justify-center text-center items-center p-2 mb-5 '>
-				<p className='text-xl flex-1'>Items</p>
-				<p className='text-xl flex-1'>Quantity</p>
-				<p className='text-xl flex-1'>Price</p>
-			</div>
-			<hr className='bg-white h-1 outline-none' />
-			{products.map(product => (
-				<CartItem key={product.id} product={product} />
-			))}
-			<hr className='bg-white h-1 outline-none' />
+			{products.length !== 0 ? (
+				<>
+					<div className='hidden md:flex justify-center text-center items-center p-2 mb-5 '>
+						<p className='text-xl flex-1'>Items</p>
+						<p className='text-xl flex-1'>Quantity</p>
+						<p className='text-xl flex-1'>Price</p>
+					</div>
+					<hr className='bg-white h-1 outline-none' />
+					{products.map(product => (
+						<CartItem key={product.id} product={product} />
+					))}
+					<hr className='bg-white h-1 outline-none' />
 
-			<div className='border-2 float-none md:float-right mx-auto md:mx-6 my-3 p-6 bg-slate-300 w-96 '>
-				<h3 className='font-bold'>Subtotal: {total}</h3>
-			</div>
+					<div className='border-2 float-none md:float-right mx-auto md:mx-6 my-3 p-6 bg-slate-300 w-96 '>
+						<h3 className='font-bold'>Subtotal: {total}</h3>
+					</div>
+				</>
+			) : (
+				<h1 className='text-center text-3xl p-5'>Your cart is empty</h1>
+			)}
 			<div />
 			<Newsletter />
 			<Footer />

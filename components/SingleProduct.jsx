@@ -4,25 +4,25 @@ import Image from 'next/image';
 import { singleProductIcons } from '../pages/data';
 import { useDispatch } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '/redux/userSlice';
-// import { addProduct } from '../redux/cartRedux';
+import { addProduct } from '/redux/cartSlice';
+import { useSelector } from 'react-redux';
 
 export const SingleProduct = ({ product }) => {
-	const [isFavorited, setIsFavorited] = useState(false);
+	const { wishlist } = useSelector(state => state.user);
 	const router = useRouter();
 	const { _id, img } = product;
 	const dispatch = useDispatch();
-	// const addProductToCart = () => {
-	//   dispatch(addProduct({ product }));
-	// }
+	const addProductToCart = () => {
+	  dispatch(addProduct({...product, quantity: 1}));
+	}
 
 	// Toggles between functions depending on icon
 	const handleClick = name => {
 		if (name === 'emptyHeart') {
-			setIsFavorited(prev => !prev);
 			dispatch(
-				isFavorited 
-        ? addToWishlist(product) 
-        : removeFromWishlist(product)
+				wishlist.indexOf(product) === -1
+					? addToWishlist(product)
+					: removeFromWishlist(product)
 			);
 		} else if (name === 'shoppingCart') {
 			addProductToCart();
@@ -53,7 +53,9 @@ export const SingleProduct = ({ product }) => {
 							src={
 								name !== 'emptyHeart'
 									? require(`icons/${name}.png`)
-									: require(`icons/${isFavorited ? 'empty' : 'full'}Heart.png`)
+									: require(`icons/${
+											wishlist.indexOf(product) === -1 ? 'empty' : 'full'
+									  }Heart.png`)
 							}
 							width={44}
 							height={44}

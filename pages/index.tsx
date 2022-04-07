@@ -14,13 +14,6 @@ const App = () => {
   const {currentUser} = useSelector((state: RootStateOrAny) => state.user)
   const router = useRouter();
 
-  // useEffect(() => {
-  //   // const user = localStorage.getItem('user')
-  //   if (!currentUser) {
-  //     router.push('/Login')
-  //   }
-  // }, [currentUser, router])
-
 	return (
 		<>
     <Head>

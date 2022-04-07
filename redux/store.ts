@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers, Reducer } from '@reduxjs/toolkit';
 import cartSlice from './cartSlice';
 import userSlice from './userSlice';
 import {
@@ -10,22 +10,25 @@ import {
 	PERSIST,
 	PURGE,
 	REGISTER,
+	PersistConfig,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const persistConfig = {
+const persistConfig: PersistConfig<any> = {
 	key: 'root',
 	version: 1,
-	storage
+	storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userSlice);
+const rootReducer: Reducer = combineReducers({
+	user: userSlice,
+	cart: cartSlice,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-	reducer: {
-		cart: cartSlice,
-		user: persistedReducer,
-	},
+	reducer: persistedReducer,
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({
 			serializableCheck: {
