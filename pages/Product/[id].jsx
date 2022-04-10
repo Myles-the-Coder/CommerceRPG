@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Navbar } from 'components/Navbar';
@@ -6,7 +6,7 @@ import { Announcements } from 'components/Announcements';
 import { Newsletter } from 'components/Newsletter';
 import { Footer } from 'components/Footer';
 import { userRequest } from '/requestMethods';
-import {addProduct} from '/redux/cartSlice'
+import { addProduct } from '/redux/cartSlice';
 import { useDispatch } from 'react-redux';
 import { Spinner } from 'components/Spinner';
 
@@ -35,20 +35,18 @@ const Product = () => {
 		);
 	};
 
-	const addProductToCart = () => {
-		dispatch(
-			addProduct({ ...product, quantity })
-		);
-	};
+	const addProductToCart = () => dispatch(addProduct({ ...product, quantity }));
 
 	return (
 		<>
 			<Announcements />
 			<Navbar />
-			{!product ? <Spinner/> : (
+			{!product ? (
+				<Spinner />
+			) : (
 				<div className='h-[85vh] flex flex-col md:flex-row justify-center items-center p-9'>
-					<div className='border p-20 flex-1 flex flex-col justify-center items-center shadow-xl rounded'>
-						<h1 className='font-bold text-3xl mb-8'>{product.title}</h1>
+					<div className='border p-20 flex-1 flex flex-col justify-center items-center shadow-xl rounded bg-gray-200'>
+						<h1 className='font-bold text-2xl mb-8 text-center'>{product.title}</h1>
 						<Image
 							src={product.img}
 							width={125}
@@ -56,7 +54,7 @@ const Product = () => {
 							alt={product.title}
 						/>
 					</div>
-					<div className='p-2 mx-10 text-center md:text-start'>
+					<div className='flex-1 p-2 mx-10 text-center md:text-start'>
 						<p className='text-2xl'>{product.desc}</p>
 						<p className='my-2 font-bold text-2xl'>Price: {product.price}</p>
 						<div className='flex items-center justify-center'>

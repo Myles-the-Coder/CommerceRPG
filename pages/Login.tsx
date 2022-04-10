@@ -1,4 +1,4 @@
-import React, { FormEvent, ReactEventHandler, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/apiCalls';
@@ -10,18 +10,12 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (currentUser) {
-      window.location.href = '/';
-    }
-  }, [currentUser]);
-
 	const handleLogin = (e: FormEvent) => {
 		e.preventDefault();
 		login(dispatch, { username, password });
-		if (error) {
-			window.location.href = '/';
-		}
+    if (currentUser) {
+      window.location.href = '/';
+    }
 	};
 
 	return (

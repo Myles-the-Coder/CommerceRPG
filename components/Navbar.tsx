@@ -7,15 +7,12 @@ import { useDispatch } from 'react-redux';
 import { userLogout } from 'redux/userSlice';
 
 export const Navbar = () => {
-  const {currentUser} = useSelector((state: RootState) => state.user)
-	const {quantity} = useSelector((state: RootState) => state.cart);
-	const dispatch = useDispatch()
-  const handleLogout = () => {
-    dispatch(userLogout())
-    window.location.href='/'
-  }
+	const { currentUser } = useSelector((state: RootState) => state.user);
+	const { quantity } = useSelector((state: RootState) => state.cart);
+	const dispatch = useDispatch();
+	const handleLogout = () => dispatch(userLogout());
 
-  return (
+	return (
 		<nav className='h-16 border-b-2 bg-gray-200'>
 			<div className='py-3 flex justify-evenly text-center items-center'>
 				<div className='text-base cursor-pointer m-2 hidden md:block'>EN</div>
@@ -48,7 +45,13 @@ export const Navbar = () => {
 									<a>REGISTER</a>
 								</Link>
 							</li>
-						) : <li className='mx-1 md:mx-2 cursor-pointer hover:scale-110 transition ease' onClick={handleLogout}>LOGOUT</li> }
+						) : (
+							<li
+								className='mx-1 md:mx-2 cursor-pointer hover:scale-110 transition ease'
+								onClick={handleLogout}>
+								LOGOUT
+							</li>
+						)}
 						<li className='mx-4 relative transition-all ease hover:scale-110'>
 							{' '}
 							<Link href='/Cart'>

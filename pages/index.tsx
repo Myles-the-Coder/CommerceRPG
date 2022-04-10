@@ -17,18 +17,12 @@ const App = () => {
 			<Head>
 				<title>CommerceRPG</title>
 			</Head>
-			{currentUser ? (
-				<>
-					<Announcements />
-					<Navbar />
-					<Slider />
-					<Categories />
-					<Newsletter />
-					<Footer />
-				</>
-			) : (
-				<Login />
-			)}
+			<Announcements />
+			<Navbar />
+			<Slider />
+			<Categories />
+			<Newsletter />
+			<Footer />
 		</>
 	);
 };

@@ -10,7 +10,7 @@ const userSlice = createSlice({
 		wishlist: [] as Product[],
 	},
 	reducers: {
-		loginStart: state => void(state.isFetching = true),
+		loginStart: state => void (state.isFetching = true),
 		loginSuccess: (state, { payload }) => {
 			state.isFetching = false;
 			state.currentUser = payload;
@@ -20,16 +20,14 @@ const userSlice = createSlice({
 			state.isFetching = false;
 			state.error = true;
 		},
-		userLogout: state => void(state.currentUser = null),
+		userLogout: state => void (state.currentUser = null),
 		addToWishlist: (state, { payload }) => {
 			const product = state.wishlist.find(
 				product => product._id === payload._id
 			);
 			!product
 				? state.wishlist.push(payload)
-				: (state = state.wishlist.map(product =>
-						product._id === payload._id ? { ...product } : product
-				  ));
+				: (state = state.wishlist.map((product: Product) => product));
 		},
 		removeFromWishlist: (state, { payload }) => {
 			const index = state.wishlist.findIndex(({ _id }) => _id === payload._id);
