@@ -12,7 +12,7 @@ export const Navbar = () => {
 	const dispatch = useDispatch()
   const handleLogout = () => {
     dispatch(userLogout())
-    window.location.reload()
+    window.location.href='/'
   }
 
   return (
@@ -43,13 +43,13 @@ export const Navbar = () => {
 				<div className='text-black-500 flex-2 md:flex-1'>
 					<ul className='flex items-center justify-end text-center'>
 						{!currentUser ? (
-							<li className='mx-1 md:mx-2 cursor-pointer'>
+							<li className='mx-1 md:mx-2 cursor-pointer hover:scale-110 transition ease'>
 								<Link href='/Register'>
 									<a>REGISTER</a>
 								</Link>
 							</li>
-						) : <li className='mx-1 md:mx-2 cursor-pointer' onClick={handleLogout}>LOGOUT</li> }
-						<li className='mx-4 relative'>
+						) : <li className='mx-1 md:mx-2 cursor-pointer hover:scale-110 transition ease' onClick={handleLogout}>LOGOUT</li> }
+						<li className='mx-4 relative transition-all ease hover:scale-110'>
 							{' '}
 							<Link href='/Cart'>
 								<a>
@@ -61,8 +61,8 @@ export const Navbar = () => {
 									</div>
 									<Image
 										src={require('icons/shoppingCart.png')}
-										width={35}
-										height={35}
+										width={40}
+										height={40}
 										alt='Search Icon'
 										className='cursor-pointer'
 									/>

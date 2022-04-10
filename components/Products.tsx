@@ -2,6 +2,7 @@
 import { SingleProduct } from 'components/SingleProduct';
 import { publicRequest } from '../requestMethods';
 import { Spinner } from '../components/Spinner';
+import { Product } from 'redux/cartSlice';
 
 export const Products = ({ category, filter, sort }) => {
 	const [products, setProducts] = useState([]);
@@ -70,7 +71,7 @@ export const Products = ({ category, filter, sort }) => {
 
 	return (
 		<div className='flex p-2 flex-wrap justify-center items-center'>
-			{filteredProducts.map(product => (
+			{filteredProducts.map((product: Product) => (
 				<SingleProduct key={product._id} product={product} />
 			))}
 		</div>

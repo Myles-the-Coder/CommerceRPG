@@ -5,12 +5,13 @@ import { Newsletter } from 'components/Newsletter';
 import { Footer } from 'components/Footer';
 import { useSelector } from 'react-redux';
 import { SingleProduct } from '../components/SingleProduct';
+import { Product } from 'redux/cartSlice';
+import { RootState } from 'redux/store';
 
 const Wishlist = () => {
-	const { wishlist } = useSelector(state => state.user);
-	console.log(wishlist);
+	const { wishlist } = useSelector((state: RootState) => state.user);
 
-	return (
+  return (
 		<>
 			<Announcements />
 			<Navbar />
@@ -18,7 +19,7 @@ const Wishlist = () => {
 				Your Wishlist {wishlist.length === 0 && 'is currently empty'}
 			</h1>
 			<div className='flex p-2 flex-wrap justify-center items-center'>
-				{wishlist.map(product => (
+				{wishlist.map((product: Product) => (
 					<SingleProduct key={product._id} product={product} />
 				))}
 			</div>

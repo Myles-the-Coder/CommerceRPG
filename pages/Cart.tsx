@@ -7,12 +7,21 @@ import { CartItem } from 'components/CartItem';
 import { useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import { userRequest } from '../requestMethods';
+import { Product } from 'redux/cartSlice';
 import Link from 'next/link';
+import { RootState } from 'redux/store';
 
 const Cart = () => {
-	const { wishlist } = useSelector(state => state.user);
-	const { products, quantity, total } = useSelector(state => state.cart);
+	const { wishlist } = useSelector((state: RootState) => state.user);
+	const { products, quantity } = useSelector((state: RootState)=> state.cart);
 	const stripePromise = loadStripe(process.env.STRIPE_KEY);
+
+	const cartTotal = (products: Product[]) => {
+		return products.reduce(
+			(sum, { price, quantity }) => sum + price * quantity,
+			0
+		);
+	};
 
 	const handleStripeCheckout = async () => {
 		try {
@@ -21,9 +30,9 @@ const Cart = () => {
 				item: {
 					title: 'CommerceRPG',
 					desc: 'Your Cart Items',
-					img: '',
+					img: 'Test',
 					quantity,
-					price: total,
+					price: cartTotal(products),
 				},
 			});
 
@@ -40,21 +49,23 @@ const Cart = () => {
 			<Announcements />
 			<Navbar />
 			<div className='flex justify-between items-center p-2 mb-5'>
-				<button className='py-2 m-2 text-sm md:text-lg bg-white px-5 border-2 border-slate-400 uppercase'>
-					Continue shopping
-				</button>
-				<a href=''>Shopping Cart({quantity})</a>
+				<Link href='/ProductList' passHref>
+					<a className='py-2 m-2 text-sm md:text-lg bg-white px-5 border-2 border-slate-400 uppercase transition ease hover:scale-105 active:scale-100'>
+						Continue shopping
+					</a>
+				</Link>
+				<a className='transition ease hover:underline underline-offset-8 cursor-pointer'>Shopping Cart({quantity})</a>
 				<Link href='/Wishlist'>
-					<a >Your Wishlist({wishlist.length})</a>
+					<a className='transition ease hover:underline underline-offset-8'>Your Wishlist({wishlist.length})</a>
 				</Link>
 				<button
-					className='py-2 m-2 text-sm md:text-lg  bg-black text-white px-5 uppercase'
+					className='py-2 m-2 text-sm md:text-lg  bg-black text-white px-5 uppercase transition ease hover:scale-105 active:scale-100'
 					onClick={handleStripeCheckout}>
 					Checkout
 				</button>
 			</div>
 
-			{products.length !== 0 ? (
+			{products ? (
 				<>
 					<div className='hidden md:flex justify-center text-center items-center p-2 mb-5 '>
 						<p className='text-xl flex-1'>Items</p>
@@ -62,13 +73,13 @@ const Cart = () => {
 						<p className='text-xl flex-1'>Price</p>
 					</div>
 					<hr className='bg-white h-1 outline-none' />
-					{products.map(product => (
-						<CartItem key={product.id} product={product} />
+					{products.map((product: Product) => (
+						<CartItem key={product._id} product={product} />
 					))}
 					<hr className='bg-white h-1 outline-none' />
 
 					<div className='border-2 float-none md:float-right mx-auto md:mx-6 my-3 p-6 bg-slate-300 w-96 '>
-						<h3 className='font-bold'>Subtotal: {total}</h3>
+						<h3 className='font-bold'>Subtotal: {cartTotal(products)}</h3>
 					</div>
 				</>
 			) : (

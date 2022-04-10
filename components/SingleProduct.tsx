@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { singleProductIcons } from '../pages/data';
@@ -6,21 +6,22 @@ import { useDispatch } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '/redux/userSlice';
 import { addProduct } from '/redux/cartSlice';
 import { useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
 
 export const SingleProduct = ({ product }) => {
-	const { wishlist } = useSelector(state => state.user);
+	const { wishlist } = useSelector((state: RootState) => state.user);
 	const router = useRouter();
 	const { _id, img } = product;
 	const dispatch = useDispatch();
 	const addProductToCart = () => {
-	  dispatch(addProduct({...product, quantity: 1}));
-	}
-
+		dispatch(addProduct({ ...product, quantity: 1 }));
+	};
+  const isInWishlist = wishlist.findIndex(({_id}) => _id === product._id) > 0
 	// Toggles between functions depending on icon
 	const handleClick = name => {
 		if (name === 'emptyHeart') {
 			dispatch(
-				wishlist.indexOf(product) === -1
+				!isInWishlist
 					? addToWishlist(product)
 					: removeFromWishlist(product)
 			);
@@ -40,8 +41,8 @@ export const SingleProduct = ({ product }) => {
 					priority
 					src={img}
 					alt='Product Image'
-					width={125}
-					height={125}
+					width={130}
+					height={130}
 				/>
 			</div>
 			<div className='m-3 flex transition-all ease duration-200 opacity-0 group-hover:opacity-100'>
@@ -54,7 +55,7 @@ export const SingleProduct = ({ product }) => {
 								name !== 'emptyHeart'
 									? require(`icons/${name}.png`)
 									: require(`icons/${
-											wishlist.indexOf(product) === -1 ? 'empty' : 'full'
+											!isInWishlist ? 'empty' : 'full'
 									  }Heart.png`)
 							}
 							width={44}
