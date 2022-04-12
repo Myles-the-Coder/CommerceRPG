@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Product } from './cartSlice';
 
+const initialState = {
+	currentUser: null,
+	isFetching: false,
+	error: false,
+	wishlist: [] as Product[],
+};
+
 const userSlice = createSlice({
 	name: 'user',
-	initialState: {
-		currentUser: null,
-		isFetching: false,
-		error: false,
-		wishlist: [] as Product[],
-	},
+	initialState,
 	reducers: {
-		loginStart: state => void (state.isFetching = true),
+		loginStart: state => {
+			state.isFetching = true;
+		},
 		loginSuccess: (state, { payload }) => {
 			state.isFetching = false;
 			state.currentUser = payload;
@@ -20,11 +24,11 @@ const userSlice = createSlice({
 			state.isFetching = false;
 			state.error = true;
 		},
-		userLogout: state => void (state.currentUser = null),
+		userLogout: state => {
+			state.currentUser = null;
+		},
 		addToWishlist: (state, { payload }) => {
-			const product = state.wishlist.find(
-				product => product._id === payload._id
-			);
+			const product = state.wishlist.find(({ _id }) => _id === payload._id);
 			!product
 				? state.wishlist.push(payload)
 				: (state = state.wishlist.map((product: Product) => product));

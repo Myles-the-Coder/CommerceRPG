@@ -1,28 +1,30 @@
 import React, { FormEvent, useState } from 'react';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
-import { login } from '../redux/apiCalls';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { formSubmit } from 'redux/apiCalls';
+import { RootState } from 'redux/store';
+import { useRouter } from 'next/router';
 
 const Login = () => {
-  const { isFetching, error, currentUser } = useSelector(state => state.user);
+  const router = useRouter()
+  const { isFetching, error, currentUser } = useSelector((state: RootState) => state.user);
+	const dispatch = useDispatch();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const dispatch = useDispatch();
 
 	const handleLogin = (e: FormEvent) => {
 		e.preventDefault();
-		login(dispatch, { username, password });
-    if (currentUser) {
-      window.location.href = '/';
-    }
+		formSubmit(dispatch, { username, password }, 'login');
+    currentUser && router.push('/')
 	};
 
 	return (
 		<div className='bg-gray-500 h-screen w-screen grid place-items-center'>
 			<form
 				onSubmit={e => handleLogin(e)}
-				action=''
+				method='post'
 				className='flex flex-col justify-center items-center bg-gray-100 rounded w-9/12 md:w-6/12 p-10'>
 				<h1 className='font-medium text-4xl mb-4 uppercase'>Sign in</h1>
 
@@ -45,16 +47,17 @@ const Login = () => {
 					className='w-10/12 border-2 outline-none p-1 my-1'
 					onChange={({ target }) => setPassword(target.value)}
 				/>
-				{error ? (
+				{error && (
 					<span className='text-red-500 text-xl'>
 						Wrong Username or Password
 					</span>
-				) : null}
+				)}
 				<button
 					type='submit'
 					className={`mt-4 font-semibold border-2 p-2 w-5/12 transition-all ease bg-gray-300 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed`}
 					onClick={e => handleLogin(e)}
-					disabled={isFetching}>
+          disabled={isFetching}
+					>
 					Login
 				</button>
 				<div className='inline-block p-3 text-lg'>

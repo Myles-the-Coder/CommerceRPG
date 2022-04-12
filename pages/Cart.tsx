@@ -10,8 +10,12 @@ import { userRequest } from '../requestMethods';
 import { Product } from 'redux/cartSlice';
 import Link from 'next/link';
 import { RootState } from 'redux/store';
+import { useDispatch } from 'react-redux';
+import { clearCart } from 'redux/cartSlice';
+
 
 const Cart = () => {
+  const dispatch = useDispatch();
 	const { wishlist } = useSelector((state: RootState) => state.user);
 	const { products, quantity } = useSelector((state: RootState)=> state.cart);
 	const stripePromise = loadStripe(process.env.STRIPE_KEY);
@@ -22,6 +26,10 @@ const Cart = () => {
 			0
 		);
 	};
+
+  const clearCartHandler = () => {
+    dispatch(clearCart());
+  }
 
 	const handleStripeCheckout = async () => {
 		try {
@@ -65,7 +73,7 @@ const Cart = () => {
 				</button>
 			</div>
 
-			{products ? (
+			{products.length > 0 ? (
 				<>
 					<div className='hidden md:flex justify-center text-center items-center p-2 mb-5 '>
 						<p className='text-xl flex-1'>Items</p>
