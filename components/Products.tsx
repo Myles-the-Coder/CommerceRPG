@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { SingleProduct } from 'components/SingleProduct';
 import { publicRequest } from '../requestMethods';
 import { Spinner } from '../components/Spinner';
@@ -10,14 +10,19 @@ export const Products = ({ category, filter, sort }) => {
 	const [filteredProducts, setFilteredProducts] = useState([]);
 
 	useEffect(() => {
-		const getProducts = async () => {
-			const { data } = await publicRequest.get(
-				`/products${category ? `?category=${category}` : ''}`
-			);
-			setProducts(data);
-			setLoading(false);
-		};
-		getProducts();
+		try {
+			const getProducts = async () => {
+				const { data } = await publicRequest.get(
+					`/products${category ? `?category=${category}` : ''}`
+				);
+				setProducts(data);
+				setLoading(false);
+				console.log(products);
+			};
+			getProducts();
+		} catch (error) {
+			console.error(error);
+		}
 	}, [category]);
 
 	useEffect(() => {
@@ -77,4 +82,3 @@ export const Products = ({ category, filter, sort }) => {
 		</div>
 	);
 };
-

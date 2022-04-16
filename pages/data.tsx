@@ -3,22 +3,25 @@ export const sliderItems = [
 		id: 0,
 		img: 'https://th.bing.com/th/id/R.f1f4e0eff8ce42ba20805da5f709d6e4?rik=8rVndKkAzONkiQ&pid=ImgRaw&r=0',
 		title: 'All your adventuring needs',
-		desc: 'Bombs and Potions galore! 10% off for new customers',
+		desc: 'Welcome Traveler! 10% off for new customers!',
 		bg: 'bg-gray-100',
+    href: '/ProductList'
 	},
 	{
 		id: 1,
 		img: 'https://th.bing.com/th/id/R.f1f4e0eff8ce42ba20805da5f709d6e4?rik=8rVndKkAzONkiQ&pid=ImgRaw&r=0',
-		title: 'Placeholder 2',
-		desc: 'Bombs and Potions galore! 10% off for new customers',
+		title: 'Weapons for any quest',
+		desc: 'Swords, Axes, and More!',
 		bg: 'bg-gray-200',
+    href: '/ProductList?category=weapons'
 	},
 	{
 		id: 2,
 		img: 'https://th.bing.com/th/id/R.f1f4e0eff8ce42ba20805da5f709d6e4?rik=8rVndKkAzONkiQ&pid=ImgRaw&r=0',
 		title: 'Placeholder 3',
-		desc: 'Bombs and Potions galore! 10% off for new customers',
+		desc: 'All the basics a hero needs',
 		bg: 'bg-gray-300',
+    href: '/ProductList?category=inventory'
 	},
 ];
 

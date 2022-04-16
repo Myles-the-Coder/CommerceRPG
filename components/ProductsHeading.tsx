@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const ProductsHeading = ({category, handleFilter, handleSort}) => {
-  const capitalize = (s) => {
+  const capitalize = (s: string) => {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
@@ -12,7 +12,7 @@ export const ProductsHeading = ({category, handleFilter, handleSort}) => {
     <div className='flex items-center justify-between md:justify-center'>
 				{!category && <div className='mx-4'>
 					<span className='text-xl font-medium'>Filter Products</span>
-					<select name='Filter' defaultValue='all' className='p-2 border-2 m-2 cursor-pointer' onChange={handleFilter}>
+					<select name='Filter' className='p-2 border-2 m-2 cursor-pointer' onChange={handleFilter}>
 						<option value='all'>All Products</option>
 						<option value='weapons'>Weapons</option>
 						<option value='armor'>Armor</option>

@@ -26,13 +26,13 @@ export const Navbar = () => {
 					/>
 					<Image
 						src={require('icons/magnifyingGlass.png')}
-						width={30}
+						width={35}
 						height={30}
 						className='bg-slate-300 cursor-pointer'
 						alt='Search Icon'
 					/>
 				</div>
-				<div className='text-black-500 text-xl md:text-2xl text-bold'>
+				<div className='text-black-500 text-xl md:text-2xl text-bold flex-1'>
 					<Link href='/'>
 						<a>CommerceRPG</a>
 					</Link>

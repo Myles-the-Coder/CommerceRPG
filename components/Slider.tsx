@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { sliderItems } from 'pages/data';
 
 export const Slider = () => {
@@ -7,8 +8,8 @@ export const Slider = () => {
 
 	const handleClick = (direction: string) => {
 		direction === 'left'
-			? setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)
-			: setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+			? setSlideIndex(slideIndex > 0 ? slideIndex - 100 : 200)
+			: setSlideIndex(slideIndex < 200 ? slideIndex + 100 : 0);
 	};
 
 	return (
@@ -23,15 +24,11 @@ export const Slider = () => {
 					onClick={() => handleClick('left')}
 				/>
 			</div>
-			{sliderItems.map(({ id, img, title, desc, bg }) => {
+			{sliderItems.map(({ id, img, title, desc, bg, href }) => {
 				return (
 					<div className={`text-center md:text-start ${bg}`} key={id}>
 						<div
-							className={`h-screen w-screen flex flex-col lg:flex-row items-center justify-center transform transition-all ease duration-1000 md:text-start ${bg} ${
-								slideIndex !== 1
-									? `-translate-x-[${slideIndex * 100}vw]`
-									: '-translate-x-full'
-							}`}>
+							className={`h-screen w-screen flex flex-col lg:flex-row items-center justify-center transform transition-all ease duration-1000 md:text-start ${bg} ${slideIndex !== 100 ? `-translate-x-[${slideIndex}vw]` : `-translate-x-full`}`}>
 							<div className='ml-0 lg:ml-5 flex-1'>
 								<Image src={img} width={650} height={450} alt='blank' />
 							</div>
@@ -40,9 +37,11 @@ export const Slider = () => {
 									{title}
 								</h1>
 								<p className='uppercase font-bold mb-4'>{desc}</p>
-								<button className='p-2 border border-slate-800'>
+                <Link href={href}>
+              	<a className='p-2 border border-slate-800'>
 									Shop Now
-								</button>
+								</a>
+                </Link>
 							</div>
 						</div>
 					</div>

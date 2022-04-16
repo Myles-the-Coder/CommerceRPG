@@ -6,6 +6,7 @@ import { Newsletter } from 'components/Newsletter';
 import { Products } from 'components/Products';
 import { Footer } from 'components/Footer';
 import { ProductsHeading } from 'components/ProductsHeading';
+import { useMemo } from 'react';
 
 const ProductList = () => {
 	const router = useRouter();
